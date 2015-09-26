@@ -1,28 +1,27 @@
 package mvctest.domain;
+
+import com.google.common.base.Objects;
+import org.springframework.data.cassandra.mapping.PrimaryKey;
+import org.springframework.data.cassandra.mapping.Table;
+
 import java.io.Serializable;
+import java.util.UUID;
 
-import javax.persistence.*;
-
-@Entity
+@Table("hotels")
 public class Hotel implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	private Long id;
+	@PrimaryKey
+	private UUID id;
 
-	@Column(nullable = false)
 	private String name;
 
-	@Column(nullable = false)
 	private String address;
 
-	@Column(nullable = false)
 	private String zip;
 
-	@Version
-	private Long version;
+	private Integer version;
 
 	public Hotel() {
 	}
@@ -31,7 +30,7 @@ public class Hotel implements Serializable {
 		this.name = name;
 	}
 
-	public Long getId() {
+	public UUID getId() {
 		return id;
 	}
 
@@ -47,7 +46,7 @@ public class Hotel implements Serializable {
 		return this.zip;
 	}
 
-	public void setId(Long id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 
@@ -63,13 +62,22 @@ public class Hotel implements Serializable {
 		this.zip = zip;
 	}
 
-	public Long getVersion() {
+	public Integer getVersion() {
 		return version;
 	}
 
-	public void setVersion(Long version) {
+	public void setVersion(Integer version) {
 		this.version = version;
-	}	
-	
-	
+	}
+
+	@Override
+	public String toString() {
+		return Objects.toStringHelper(this)
+				.add("id", id)
+				.add("name", name)
+				.add("address", address)
+				.add("zip", zip)
+				.add("version", version)
+				.toString();
+	}
 }

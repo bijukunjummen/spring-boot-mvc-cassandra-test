@@ -1,6 +1,7 @@
 package mvctest.web;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.validation.Valid;
 
@@ -37,17 +38,17 @@ public class RestHotelController {
 	}
 
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public Hotel get(@PathVariable("id") long id) {
+	public Hotel get(@PathVariable("id") UUID id) {
 		return this.hotelRepository.findOne(id);
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-	public Hotel update(@PathVariable("id") long id, @RequestBody @Valid Hotel hotel) {
-		return hotelRepository.save(hotel);
+	public Hotel update(@PathVariable("id") UUID id, @RequestBody @Valid Hotel hotel) {
+		return hotelRepository.update(hotel);
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-	public ResponseEntity<Boolean> delete(@PathVariable("id") long id) {
+	public ResponseEntity<Boolean> delete(@PathVariable("id") UUID id) {
 		this.hotelRepository.delete(id);
 		return new ResponseEntity<Boolean>(Boolean.TRUE, HttpStatus.OK);
 	}

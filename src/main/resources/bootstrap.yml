@@ -1,0 +1,17 @@
+spring:
+  cloud:
+    config:
+      enabled: false
+  profiles:
+    active: ${archaius.deployment.environment:local}
+
+eureka:
+  client:
+    enabled: true
+    useDnsForFetchingServiceUrls: false
+    eurekaServerURLContext: eureka
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    nonSecurePort: 8080
+    virtualHostName: springcassandra

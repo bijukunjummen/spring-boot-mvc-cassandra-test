@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: ${archaius.deployment.applicationId:springcassandra}
+  thymeleaf:
+    cache: false
+  profiles:
+    active: ${archaius.deployment.environment:local}
+
+endpoints:
+  enabled: true
+  health:
+    enabled: true
+
+server:
+  port: 8080
+
+cassandra:
+  clusterName: samplecassandra.vip
+  keyspace: sample
+  overrideEurekaLookup: true
+  cqlPort: 9042
+  contactPoints:
+    - localhost
